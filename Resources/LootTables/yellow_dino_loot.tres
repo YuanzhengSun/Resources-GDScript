@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="LootTable" load_steps=5 format=3 uid="uid://b26obx3gbym7r"]
+
+[ext_resource type="Script" path="res://Util/Items/item_roll.gd" id="1_xpip0"]
+[ext_resource type="Resource" uid="uid://mxe3slsxjm58" path="res://Resources/Items/Materials/stick.tres" id="2_ba7fw"]
+[ext_resource type="Script" path="res://Util/Enemy/loot_table.gd" id="2_f4ek6"]
+
+[sub_resource type="Resource" id="Resource_3ur43"]
+script = ExtResource("1_xpip0")
+item = ExtResource("2_ba7fw")
+count = 25
+weight = 0.5
+
+[resource]
+script = ExtResource("2_f4ek6")
+item_rolls = Array[ExtResource("1_xpip0")]([SubResource("Resource_3ur43")])
+roll_times = 2

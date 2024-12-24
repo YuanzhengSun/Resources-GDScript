@@ -1,0 +1,80 @@
+[gd_scene load_steps=7 format=3 uid="uid://bol6m2x0tdflu"]
+
+[ext_resource type="Script" path="res://Objects/Scripts/level_transition.gd" id="1_lo77e"]
+[ext_resource type="Texture2D" uid="uid://53h01ho1lvwp" path="res://Art/Kenney/fish.png" id="2_60wfm"]
+
+[sub_resource type="Animation" id="Animation_oynsq"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_ax8oh"]
+resource_name = "fade_out"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"switch_to_level"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_rl3xk"]
+_data = {
+"RESET": SubResource("Animation_oynsq"),
+"fade_out": SubResource("Animation_ax8oh")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_2ukk2"]
+
+[node name="LevelTransition" type="Area2D"]
+script = ExtResource("1_lo77e")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_rl3xk")
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_2ukk2")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_60wfm")

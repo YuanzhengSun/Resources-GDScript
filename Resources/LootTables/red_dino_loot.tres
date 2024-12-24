@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="LootTable" load_steps=7 format=3 uid="uid://c0dfkrne28b5n"]
+
+[ext_resource type="Script" path="res://Util/Items/item_roll.gd" id="1_vvps4"]
+[ext_resource type="Resource" uid="uid://br1e6826mf6w2" path="res://Resources/Items/Materials/rock.tres" id="2_ikg4l"]
+[ext_resource type="Resource" uid="uid://mxe3slsxjm58" path="res://Resources/Items/Materials/stick.tres" id="3_idw1w"]
+[ext_resource type="Script" path="res://Util/Enemy/loot_table.gd" id="4_ly4uj"]
+
+[sub_resource type="Resource" id="Resource_fko8t"]
+script = ExtResource("1_vvps4")
+item = ExtResource("2_ikg4l")
+count = 25
+weight = 0.5
+
+[sub_resource type="Resource" id="Resource_d43gw"]
+script = ExtResource("1_vvps4")
+item = ExtResource("3_idw1w")
+count = 25
+weight = 0.5
+
+[resource]
+script = ExtResource("4_ly4uj")
+item_rolls = Array[ExtResource("1_vvps4")]([SubResource("Resource_fko8t"), SubResource("Resource_d43gw")])
+roll_times = 3

@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="EnemyStats" load_steps=3 format=3 uid="uid://kj6u0tgjjfkx"]
+
+[ext_resource type="Script" path="res://Util/Enemy/enemy_stats.gd" id="1_7rk43"]
+[ext_resource type="Texture2D" uid="uid://eb28cx5toii3" path="res://Art/Arks/DinoSprites - vita.png" id="2_t7fky"]
+
+[resource]
+script = ExtResource("1_7rk43")
+texture = ExtResource("2_t7fky")
+max_health = 150.0
+max_speed = 20.0
+variation_range = 10.0
+acceleration_time = 2.5
+friction = 1.0

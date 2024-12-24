@@ -10,17 +10,35 @@ extends Node
 @export var max_speed := 100.0
 @export var acceleration_time := 0.1
 
-@onready var player : CharacterBody2D = get_owner()
+@export var function : Callable
+
+@onready var player : Player = get_owner()
+
+
+func _ready():
+	player.test_signal.connect(on_test_signal)
+
+
+func on_test_signal():
+	print("Guy listening to signal says hi!")
 
 
 func _physics_process(delta):
+	if !player.alive:
+		return
+	
 	# Read the player's current velocity
 	var velocity = player.velocity
 	
 	var input_direction = Input.get_vector("move_left", "move_right", "move_up", "move_down")
 	
+	var target_speed := max_speed
+	
+	if Input.is_action_pressed("primary_fire"):
+		target_speed *= 0.5
+	
 	# Apply any changes to velocity
-	velocity = velocity.move_toward(input_direction*max_speed, (1.0 / acceleration_time) * delta * max_speed)
+	velocity = velocity.move_toward(input_direction*target_speed, (1.0 / acceleration_time) * delta * target_speed)
 	
 	if input_direction.y && sign(input_direction.y) != sign(velocity.y):
 		velocity.y *= 0.75 

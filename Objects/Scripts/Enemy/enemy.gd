@@ -17,24 +17,50 @@ extends CharacterBody2D
 
 signal damaged(attack: Attack)
 
-@export_group("Textures")
-@export var textures: Array[Texture2D] = []
 
-@export_group("Vision Ranges")
-@export var detection_radius := 100.0
-@export var chase_radius := 200.0
-# This guy doesn't actually attack, he just tries to get close to the player
-@export var follow_radius := 25.0
+
+@export var stats: EnemyStats
+
+var max_speed : float
+var variation_range : float
+var acceleration_time : float
+var friction : float
 
 @onready var sprite : Sprite2D = $Sprite2D
+@onready var health: EnemyHealth = $Health
 
 var alive := true
 var stunned := false
 
+var current_speed := 0.0
+
+var item_drop : PackedScene = preload("res://Objects/Scenes/item_drop.tscn")
+
 
 func _ready():
-	sprite.texture = textures.pick_random()
+	randomize()
+	
+	# Distribute stats where they need to be
+	health.max_health = stats.max_health
+	
+	max_speed = stats.max_speed
+	variation_range = stats.variation_range
+	acceleration_time = stats.acceleration_time
+	friction = stats.friction
+	
+	sprite.texture = stats.texture
+	
+	max_speed += randf_range(-variation_range, variation_range)
 
 
 func on_damaged(attack: Attack) -> void:
 	damaged.emit(attack)
+
+
+func on_death() -> void:
+	if stats.loot_table:
+		for stack: ItemStack in stats.loot_table.roll_loot():
+			var spawned_item : ItemDrop = item_drop.instantiate()
+			spawned_item.stack = stack
+			spawned_item.global_position = global_position
+			get_tree().current_scene.add_child.call_deferred(spawned_item)

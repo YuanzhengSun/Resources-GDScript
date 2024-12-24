@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="WeaponStats" load_steps=2 format=3 uid="uid://di8qxum2o13ku"]
+
+[ext_resource type="Script" path="res://Util/Classes/weapon_stats.gd" id="1_qwq6q"]
+
+[resource]
+script = ExtResource("1_qwq6q")
+firing_cooldown = 1.5
+speed = 350.0
+damage = 25.0
+max_pierce = 5
+knockback_force = 1.0

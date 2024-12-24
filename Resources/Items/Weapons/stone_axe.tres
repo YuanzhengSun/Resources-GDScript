@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Item" load_steps=4 format=3 uid="uid://lndyvwcekt5m"]
+
+[ext_resource type="Script" path="res://Util/Items/item.gd" id="1_e7ej7"]
+[ext_resource type="Texture2D" uid="uid://dnfmimtdyt0r0" path="res://Art/Kenney/1_bit_pack.png" id="2_aa118"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b67cq"]
+atlas = ExtResource("2_aa118")
+region = Rect2(640, 112, 16, 16)
+
+[resource]
+script = ExtResource("1_e7ej7")
+item_name = "Stone Axe"
+sprite = SubResource("AtlasTexture_b67cq")

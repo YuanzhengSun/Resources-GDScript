@@ -1,0 +1,313 @@
+[gd_scene load_steps=20 format=3 uid="uid://drlfovyb0gbep"]
+
+[ext_resource type="Theme" uid="uid://d1eibj6u66lma" path="res://UI/Theme/main_theme.tres" id="1_lq2wk"]
+[ext_resource type="Script" path="res://UI/Scenes/crafting_menu.gd" id="2_nrqbd"]
+[ext_resource type="Texture2D" uid="uid://c5xonqa2480cc" path="res://Art/Kenney/ui_packed.png" id="3_si50r"]
+[ext_resource type="PackedScene" uid="uid://dim3jrs64lx8s" path="res://UI/Scenes/ingredient.tscn" id="4_0oedh"]
+[ext_resource type="PackedScene" uid="uid://dv8thk8b64oa6" path="res://UI/Scenes/recipe_button.tscn" id="4_6om1k"]
+[ext_resource type="Script" path="res://UI/Scenes/craft_button.gd" id="6_2uunc"]
+
+[sub_resource type="Animation" id="Animation_f54tb"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PanelContainer:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1327, 120)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PanelContainer:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_8ey04"]
+resource_name = "hide"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PanelContainer:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.433333),
+"transitions": PackedFloat32Array(0.5, 1),
+"update": 0,
+"values": [Vector2(1298, 120), Vector2(832, 120)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PanelContainer:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.433333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_mwbu7"]
+resource_name = "show"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PanelContainer:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.0333333, 0.433333),
+"transitions": PackedFloat32Array(0.5, 1),
+"update": 0,
+"values": [Vector2(1298, 120), Vector2(832, 120)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PanelContainer:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.0333333, 0.433333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.0333333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_b4vsw"]
+_data = {
+"RESET": SubResource("Animation_f54tb"),
+"hide": SubResource("Animation_8ey04"),
+"show": SubResource("Animation_mwbu7")
+}
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8l3y2"]
+bg_color = Color(0.0962047, 0.0962048, 0.0962047, 1)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8tt36"]
+atlas = ExtResource("3_si50r")
+region = Rect2(256, 0, 32, 32)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_n0rib"]
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_ffy6f"]
+color = Color(0.392157, 0.462745, 0.521569, 1)
+grow_begin = -3.0
+grow_end = -3.0
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_5rgka"]
+color = Color(0.466667, 0.552941, 0.623529, 1)
+grow_begin = -3.0
+grow_end = -3.0
+thickness = 3
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_f5f4s"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l1id6"]
+bg_color = Color(1, 1, 1, 0.117647)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fkuyj"]
+bg_color = Color(0, 0, 0, 0.286275)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_nld3j"]
+
+[node name="CraftingMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme = ExtResource("1_lq2wk")
+script = ExtResource("2_nrqbd")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_b4vsw")
+}
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 0
+offset_left = 1327.0
+offset_top = 120.0
+offset_right = 1711.0
+offset_bottom = 600.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_8l3y2")
+
+[node name="Panel" type="NinePatchRect" parent="PanelContainer"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_8tt36")
+patch_margin_left = 5
+patch_margin_top = 5
+patch_margin_right = 5
+patch_margin_bottom = 5
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 1
+
+[node name="Label3" type="Label" parent="PanelContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+text = " Recipes"
+vertical_alignment = 1
+
+[node name="Recipes" type="MarginContainer" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 4
+
+[node name="ScrollContainer" type="ScrollContainer" parent="PanelContainer/VBoxContainer/Recipes"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_n0rib")
+
+[node name="RecipeContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer/Recipes/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="RecipeButton" parent="PanelContainer/VBoxContainer/Recipes/ScrollContainer/RecipeContainer" instance=ExtResource("4_6om1k")]
+layout_mode = 2
+
+[node name="InputLabel" type="Label" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+text = " Input:"
+
+[node name="Ingredients" type="MarginContainer" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 4
+
+[node name="ScrollContainer" type="ScrollContainer" parent="PanelContainer/VBoxContainer/Ingredients"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_n0rib")
+
+[node name="IngredientContainer" type="VBoxContainer" parent="PanelContainer/VBoxContainer/Ingredients/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Ingredient" parent="PanelContainer/VBoxContainer/Ingredients/ScrollContainer/IngredientContainer" instance=ExtResource("4_0oedh")]
+layout_mode = 2
+size_flags_horizontal = 1
+
+[node name="OutputLabel" type="Label" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+text = " Output:"
+
+[node name="Output" type="MarginContainer" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 4
+
+[node name="OutputItem" parent="PanelContainer/VBoxContainer/Output" instance=ExtResource("4_0oedh")]
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+size_flags_horizontal = 1
+
+[node name="HSeparator3" type="HSeparator" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 1
+theme_override_styles/separator = SubResource("StyleBoxLine_ffy6f")
+
+[node name="HSeparator" type="HSeparator" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 1
+theme_override_styles/separator = SubResource("StyleBoxLine_5rgka")
+
+[node name="HSeparator2" type="HSeparator" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = -1
+theme_override_styles/separator = SubResource("StyleBoxLine_ffy6f")
+
+[node name="CraftContainer" type="MarginContainer" parent="PanelContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 6
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 6
+theme_override_constants/margin_bottom = 6
+
+[node name="CraftButton" type="Button" parent="PanelContainer/VBoxContainer/CraftContainer"]
+layout_mode = 2
+focus_mode = 0
+mouse_filter = 1
+theme = ExtResource("1_lq2wk")
+theme_override_colors/font_disabled_color = Color(0.835718, 3.22476e-06, 7.70092e-07, 1)
+theme_override_font_sizes/font_size = 32
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_f5f4s")
+theme_override_styles/hover = SubResource("StyleBoxFlat_l1id6")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_fkuyj")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_nld3j")
+script = ExtResource("6_2uunc")
+
+[node name="Label" type="Label" parent="PanelContainer/VBoxContainer/CraftContainer/CraftButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 32
+text = "CRAFT"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="pressed" from="PanelContainer/VBoxContainer/CraftContainer/CraftButton" to="." method="_on_craft_button_pressed"]

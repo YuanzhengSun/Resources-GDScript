@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Item" load_steps=4 format=3 uid="uid://ct5oncxj1qalo"]
+
+[ext_resource type="Script" path="res://Util/Items/item.gd" id="1_arsl6"]
+[ext_resource type="Texture2D" uid="uid://dnfmimtdyt0r0" path="res://Art/Kenney/1_bit_pack.png" id="2_0tdqn"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lp176"]
+atlas = ExtResource("2_0tdqn")
+region = Rect2(672, 80, 16, 16)
+
+[resource]
+script = ExtResource("1_arsl6")
+item_name = "Stone Shovel"
+sprite = SubResource("AtlasTexture_lp176")

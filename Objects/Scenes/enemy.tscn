@@ -1,22 +1,21 @@
 [gd_scene load_steps=26 format=3 uid="uid://ckfohqhp1io7i"]
 
 [ext_resource type="Script" path="res://Objects/Scripts/Enemy/enemy.gd" id="1_i5ap4"]
-[ext_resource type="Texture2D" uid="uid://drfyuy8w6p057" path="res://Art/Arks/DinoSprites - doux.png" id="2_n1oc7"]
-[ext_resource type="Texture2D" uid="uid://c5cbe07dk5lyn" path="res://Art/Arks/DinoSprites - mort.png" id="3_yk0c8"]
-[ext_resource type="Texture2D" uid="uid://cqcr6ctruxfn5" path="res://Art/Arks/DinoSprites - tard.png" id="4_s8wpe"]
+[ext_resource type="Resource" uid="uid://d0vpr4kgckjx6" path="res://Resources/Enemy/yellow_dino.tres" id="2_cu4um"]
 [ext_resource type="Texture2D" uid="uid://eb28cx5toii3" path="res://Art/Arks/DinoSprites - vita.png" id="5_8jp15"]
 [ext_resource type="Script" path="res://Util/Components/hitbox.gd" id="6_4fu81"]
 [ext_resource type="Script" path="res://Objects/Scripts/Enemy/enemy_animation.gd" id="7_136f6"]
-[ext_resource type="Script" path="res://Util/Components/health.gd" id="8_ns7hb"]
-[ext_resource type="Script" path="res://Objects/Scripts/Enemy/enemy_state_machine.gd" id="9_23on8"]
-[ext_resource type="Script" path="res://Objects/Scripts/Enemy/States/enemy_idle.gd" id="10_d3r8p"]
-[ext_resource type="Script" path="res://Objects/Scripts/Enemy/States/enemy_wander.gd" id="11_6gdhw"]
-[ext_resource type="Script" path="res://Objects/Scripts/Enemy/States/enemy_chase.gd" id="12_ajv62"]
-[ext_resource type="Script" path="res://Objects/Scripts/Enemy/States/enemy_stun.gd" id="13_tkvih"]
-[ext_resource type="Script" path="res://Objects/Scripts/Enemy/health_label.gd" id="14_dvnq1"]
+[ext_resource type="Script" path="res://Objects/Scripts/Enemy/enemy_chase.gd" id="10_1a1ec"]
+[ext_resource type="Script" path="res://Objects/Scripts/Enemy/enemy_health.gd" id="10_uthop"]
+[ext_resource type="Script" path="res://Objects/Scripts/stun_handler.gd" id="11_drljl"]
+[ext_resource type="Script" path="res://Util/Components/hurtbox.gd" id="12_42qi7"]
+[ext_resource type="Script" path="res://Objects/Scripts/Enemy/enemy_health_bar.gd" id="13_5fmek"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_7ufao"]
 radius = 13.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_n22t5"]
+radius = 8.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_llgnc"]
 radius = 5.0
@@ -87,10 +86,22 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("HealthLabel:modulate")
+tracks/5/path = NodePath("Hitbox/CollisionShape2D:disabled")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("HealthBar:modulate")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
@@ -148,31 +159,43 @@ tracks/3/keys = {
 "update": 0,
 "values": [Vector2(0, 0), Vector2(0, -14)]
 }
-tracks/4/type = "method"
+tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath(".")
+tracks/4/path = NodePath("Hitbox/CollisionShape2D:disabled")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("HealthBar:modulate")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.05),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/6/type = "method"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath(".")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
 "times": PackedFloat32Array(1),
 "transitions": PackedFloat32Array(1),
 "values": [{
 "args": [],
 "method": &"queue_free"
 }]
-}
-tracks/5/type = "value"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("HealthLabel:modulate")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
-"times": PackedFloat32Array(0.4, 0.6),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
 }
 
 [sub_resource type="Animation" id="Animation_qhy7m"]
@@ -335,11 +358,24 @@ _data = {
 "walk_right": SubResource("Animation_sirhc")
 }
 
+[sub_resource type="Curve" id="Curve_2q65h"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -3.32967, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_83vmd"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bwf2k"]
+bg_color = Color(0.968627, 0.462745, 0.392157, 1)
+
 [node name="Enemy" type="CharacterBody2D"]
 collision_layer = 4
-collision_mask = 192
+collision_mask = 196
+motion_mode = 1
+platform_on_leave = 2
+platform_floor_layers = 4294967040
 script = ExtResource("1_i5ap4")
-textures = Array[Texture2D]([ExtResource("2_n1oc7"), ExtResource("3_yk0c8"), ExtResource("4_s8wpe"), ExtResource("5_8jp15")])
+stats = ExtResource("2_cu4um")
 
 [node name="Hitbox" type="Area2D" parent="."]
 collision_layer = 4
@@ -348,6 +384,15 @@ script = ExtResource("6_4fu81")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 shape = SubResource("CircleShape2D_7ufao")
+
+[node name="Hurtbox" type="Area2D" parent="."]
+collision_layer = 0
+script = ExtResource("12_42qi7")
+
+[node name="Hurt Collision" type="CollisionShape2D" parent="Hurtbox"]
+position = Vector2(0, 3)
+shape = SubResource("CircleShape2D_n22t5")
+debug_color = Color(0.960784, 0.180392, 0.219608, 0.419608)
 
 [node name="FloorCollision" type="CollisionShape2D" parent="."]
 position = Vector2(0, 8)
@@ -364,49 +409,37 @@ libraries = {
 }
 autoplay = "idle"
 
-[node name="HealthLabel" type="Label" parent="."]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -23.0
-offset_right = 59.0
-offset_bottom = 13.0
-grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(0.5, 0.5)
-theme_override_font_sizes/font_size = 16
-text = "Health: 10"
-horizontal_alignment = 1
-script = ExtResource("14_dvnq1")
-
 [node name="EnemyAnimation" type="Node" parent="." node_paths=PackedStringArray("animation_player", "sprite")]
 script = ExtResource("7_136f6")
 animation_player = NodePath("../AnimationPlayer")
 sprite = NodePath("../Sprite2D")
 
 [node name="Health" type="Node" parent="." node_paths=PackedStringArray("hitbox", "animation_player")]
-script = ExtResource("8_ns7hb")
+script = ExtResource("10_uthop")
 hitbox = NodePath("../Hitbox")
 animation_player = NodePath("../AnimationPlayer")
 
-[node name="EnemyStateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
-script = ExtResource("9_23on8")
-initial_state = NodePath("Wander")
+[node name="EnemyChase" type="Node" parent="."]
+script = ExtResource("10_1a1ec")
 
-[node name="Idle" type="Node" parent="EnemyStateMachine"]
-script = ExtResource("10_d3r8p")
+[node name="StunHandler" type="Node" parent="."]
+script = ExtResource("11_drljl")
+distance_curve = SubResource("Curve_2q65h")
+distance_range = 75.0
 
-[node name="Wander" type="Node" parent="EnemyStateMachine"]
-script = ExtResource("11_6gdhw")
-
-[node name="Chase" type="Node" parent="EnemyStateMachine"]
-script = ExtResource("12_ajv62")
-
-[node name="Stun" type="Node" parent="EnemyStateMachine"]
-script = ExtResource("13_tkvih")
+[node name="HealthBar" type="ProgressBar" parent="."]
+offset_left = -12.0
+offset_top = -17.405
+offset_right = 12.0
+offset_bottom = -15.405
+theme_override_styles/background = SubResource("StyleBoxFlat_83vmd")
+theme_override_styles/fill = SubResource("StyleBoxFlat_bwf2k")
+max_value = 1.0
+value = 0.5
+show_percentage = false
+script = ExtResource("13_5fmek")
 
 [connection signal="damaged" from="Hitbox" to="." method="on_damaged"]
-[connection signal="health_changed" from="Health" to="HealthLabel" method="on_health_changed"]
+[connection signal="died" from="Health" to="." method="on_death"]
+[connection signal="health_changed" from="Health" to="HealthBar" method="on_health_changed"]
+[connection signal="max_health_changed" from="Health" to="HealthBar" method="on_max_health_changed"]

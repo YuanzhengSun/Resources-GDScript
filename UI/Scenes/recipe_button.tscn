@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://dv8thk8b64oa6"]
+
+[ext_resource type="Script" path="res://UI/Scenes/recipe_button.gd" id="1_60m1t"]
+[ext_resource type="Texture2D" uid="uid://dnfmimtdyt0r0" path="res://Art/Kenney/1_bit_pack.png" id="1_uu1fq"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_85xq4"]
+atlas = ExtResource("1_uu1fq")
+region = Rect2(512, 128, 16, 16)
+
+[node name="RecipeButton" type="HBoxContainer"]
+mouse_filter = 2
+script = ExtResource("1_60m1t")
+
+[node name="Texture" type="TextureButton" parent="."]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+mouse_filter = 1
+texture_normal = SubResource("AtlasTexture_85xq4")
+stretch_mode = 0

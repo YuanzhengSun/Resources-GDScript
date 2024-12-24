@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://dl7eyk012o1hp"]
+[gd_scene load_steps=25 format=3 uid="uid://dl7eyk012o1hp"]
 
 [ext_resource type="Script" path="res://Player/Scripts/player.gd" id="1_8rogi"]
 [ext_resource type="Texture2D" uid="uid://b8qo5sm247axm" path="res://Art/Bitlytic/B0-Z0.png" id="2_5ht7k"]
@@ -6,7 +6,19 @@
 [ext_resource type="Script" path="res://Player/Scripts/player_animation.gd" id="4_of2ax"]
 [ext_resource type="Script" path="res://Player/Scripts/player_weapon.gd" id="4_rntaj"]
 [ext_resource type="Script" path="res://Player/Scripts/player_camera.gd" id="5_dq44d"]
+[ext_resource type="Script" path="res://Player/player_sprite.gd" id="5_jr47p"]
 [ext_resource type="AnimationLibrary" uid="uid://c8n45di3aj1ys" path="res://Player/Animations/player.res" id="7_qwi34"]
+[ext_resource type="Script" path="res://Util/Components/hitbox.gd" id="8_pcl1g"]
+[ext_resource type="Resource" uid="uid://cve0rukfuwve0" path="res://Resources/WeaponStats/machine_gun.tres" id="9_dj0eo"]
+[ext_resource type="Script" path="res://Player/player_health.gd" id="9_l0lo5"]
+[ext_resource type="Theme" uid="uid://d1eibj6u66lma" path="res://UI/Theme/main_theme.tres" id="12_ixdkl"]
+[ext_resource type="Script" path="res://UI/Scripts/inventory_display.gd" id="12_pqah6"]
+[ext_resource type="PackedScene" uid="uid://xieyefjkh2a1" path="res://UI/Scenes/item_slot.tscn" id="13_3osdq"]
+[ext_resource type="Script" path="res://UI/item_bar.gd" id="14_oxda4"]
+[ext_resource type="PackedScene" uid="uid://drlfovyb0gbep" path="res://UI/Scenes/crafting_menu.tscn" id="15_u7xu4"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_5xbb6"]
+radius = 6.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_2ix7w"]
 radius = 4.0
@@ -33,16 +45,30 @@ blend_point_2/pos = 0.1
 blend_mode = 1
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_6djsc"]
-graph_offset = Vector2(-369, 13)
 nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_p4448")
 nodes/TimeScale/position = Vector2(0, 80)
 nodes/WalkDirection/node = SubResource("AnimationNodeBlendSpace1D_pvejd")
 nodes/WalkDirection/position = Vector2(-540, 60)
 node_connections = [&"TimeScale", 0, &"WalkDirection", &"output", 0, &"TimeScale"]
 
-[node name="Player" type="CharacterBody2D" groups=["player"]]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("inventory_ui") groups=["player"]]
 collision_mask = 128
 script = ExtResource("1_8rogi")
+inventory_ui = NodePath("CanvasLayer/FullScreenWidth/Control/InventoryDisplay")
+
+[node name="PlayerHealth" type="Node" parent="." node_paths=PackedStringArray("collision_shape", "hitbox", "animation_player")]
+script = ExtResource("9_l0lo5")
+collision_shape = NodePath("../Hitbox/Hit Collision")
+hitbox = NodePath("../Hitbox")
+animation_player = NodePath("../AnimationPlayer")
+max_health = 3.0
+
+[node name="Hitbox" type="Area2D" parent="."]
+collision_mask = 0
+script = ExtResource("8_pcl1g")
+
+[node name="Hit Collision" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("CircleShape2D_5xbb6")
 
 [node name="FloorCollision" type="CollisionShape2D" parent="."]
 position = Vector2(0, 3)
@@ -55,6 +81,9 @@ texture = ExtResource("2_5ht7k")
 hframes = 8
 vframes = 3
 frame = 16
+region_enabled = true
+region_rect = Rect2(0.1, 0.1, 192, 96)
+script = ExtResource("5_jr47p")
 
 [node name="PlayerMovement" type="Node" parent="."]
 script = ExtResource("3_cjxe3")
@@ -64,15 +93,15 @@ script = ExtResource("4_of2ax")
 animation_tree = NodePath("../AnimationTree")
 sprite = NodePath("../PlayerSprite")
 
-[node name="PlayerWeapon" type="Node2D" parent="." node_paths=PackedStringArray("firing_position")]
+[node name="PlayerWeapon" type="Node2D" parent="."]
+position = Vector2(0, -4)
 script = ExtResource("4_rntaj")
-firing_position = NodePath("../FiringPosition")
-
-[node name="FiringPosition" type="Marker2D" parent="."]
-position = Vector2(6, -3)
+stats = ExtResource("9_dj0eo")
+camera_shake_amount = 1.0
 
 [node name="PlayerCamera" type="Camera2D" parent="." node_paths=PackedStringArray("target")]
 zoom = Vector2(2, 2)
+process_callback = 0
 script = ExtResource("5_dq44d")
 target = NodePath("..")
 
@@ -83,10 +112,98 @@ libraries = {
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
 active = false
-libraries = {
-"": ExtResource("7_qwi34")
-}
 tree_root = SubResource("AnimationNodeBlendTree_6djsc")
 anim_player = NodePath("../AnimationPlayer")
 parameters/TimeScale/scale = 1.0
-parameters/WalkDirection/blend_position = -0.415554
+parameters/WalkDirection/blend_position = 0.00076282
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="FullScreenWidth" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -640.0
+offset_bottom = -360.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Control" type="Control" parent="CanvasLayer/FullScreenWidth"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 320.0
+offset_top = 232.0
+offset_right = 320.0
+offset_bottom = 232.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+theme = ExtResource("12_ixdkl")
+
+[node name="InventoryDisplay" type="Control" parent="CanvasLayer/FullScreenWidth/Control" node_paths=PackedStringArray("slot_parent")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_top = 59.0
+offset_bottom = 59.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("12_pqah6")
+slot_parent = NodePath("HBoxContainer")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/FullScreenWidth/Control/InventoryDisplay"]
+layout_direction = 1
+layout_mode = 0
+offset_left = -254.0
+offset_right = 254.0
+offset_bottom = 60.0
+theme_override_constants/separation = 4
+alignment = 1
+script = ExtResource("14_oxda4")
+
+[node name="ItemSlot" parent="CanvasLayer/FullScreenWidth/Control/InventoryDisplay/HBoxContainer" instance=ExtResource("13_3osdq")]
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="ItemSlot2" parent="CanvasLayer/FullScreenWidth/Control/InventoryDisplay/HBoxContainer" instance=ExtResource("13_3osdq")]
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="ItemSlot3" parent="CanvasLayer/FullScreenWidth/Control/InventoryDisplay/HBoxContainer" instance=ExtResource("13_3osdq")]
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="ItemSlot4" parent="CanvasLayer/FullScreenWidth/Control/InventoryDisplay/HBoxContainer" instance=ExtResource("13_3osdq")]
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="ItemSlot5" parent="CanvasLayer/FullScreenWidth/Control/InventoryDisplay/HBoxContainer" instance=ExtResource("13_3osdq")]
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="ItemSlot6" parent="CanvasLayer/FullScreenWidth/Control/InventoryDisplay/HBoxContainer" instance=ExtResource("13_3osdq")]
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="ItemSlot7" parent="CanvasLayer/FullScreenWidth/Control/InventoryDisplay/HBoxContainer" instance=ExtResource("13_3osdq")]
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="ItemSlot8" parent="CanvasLayer/FullScreenWidth/Control/InventoryDisplay/HBoxContainer" instance=ExtResource("13_3osdq")]
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="CraftingMenu" parent="CanvasLayer" instance=ExtResource("15_u7xu4")]
+
+[connection signal="health_changed" from="PlayerHealth" to="." method="on_health_changed"]
+[connection signal="damaged" from="Hitbox" to="." method="on_hitbox_damaged"]

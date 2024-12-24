@@ -19,7 +19,13 @@ func _ready():
 
 
 func _physics_process(delta: float) -> void:
+	if !player.alive:
+		animation_tree.active = false
+		return
+	
 	var velocity = player.velocity
+	
+	#TODO: Replace this with a nested AnimationTree/AnimationStateMachine
 	
 	if velocity:
 		var time_scale = 1
@@ -30,7 +36,6 @@ func _physics_process(delta: float) -> void:
 		animation_tree.set("parameters/TimeScale/scale", time_scale)
 		animation_tree.set("parameters/WalkDirection/blend_position", sign(player.aim_position.x))
 	else:
-		sprite.flip_h = player.aim_position.x < 0
 		animation_tree.set("parameters/TimeScale/scale", 1)
 		animation_tree.set("parameters/WalkDirection/blend_position", 0)
 	

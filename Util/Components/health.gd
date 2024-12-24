@@ -6,30 +6,35 @@ extends Node
 ##############################
 
 signal health_changed(health: float)
+signal max_health_changed(max_health: float)
+signal died()
 
 @export var hitbox : Hitbox
 @export var animation_player : AnimationPlayer
 
-@export var max_health := 10.0
-@onready var health := max_health
-
-@onready var enemy : Enemy = get_owner()
+@export var max_health := 10.0 :
+	set(val):
+		max_health = val
+		max_health_changed.emit(max_health)
+		health = max_health
+@onready var health := max_health:
+	set(val):
+		health = val
+		health_changed.emit(health)
 
 
 func _ready():
 	if hitbox:
 		hitbox.damaged.connect(on_damaged)
+	
+	max_health_changed.emit(max_health)
+	health_changed.emit(health)
 
 
 func on_damaged(attack: Attack):
-	if !enemy.alive:
-		return
-	
 	health -= attack.damage
-	health_changed.emit(health)
+	health = max(0, health)
 	
 	if health <= 0:
-		health = 0
-		enemy.alive = false
 		if animation_player:
 			animation_player.play("death")

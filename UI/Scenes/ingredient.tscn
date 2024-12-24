@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://dim3jrs64lx8s"]
+
+[ext_resource type="Texture2D" uid="uid://dnfmimtdyt0r0" path="res://Art/Kenney/1_bit_pack.png" id="1_7vsxu"]
+[ext_resource type="Script" path="res://UI/Scenes/ingredient.gd" id="1_w8xpa"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m36yp"]
+atlas = ExtResource("1_7vsxu")
+region = Rect2(560, 128, 16, 16)
+
+[node name="Ingredient" type="HBoxContainer"]
+size_flags_horizontal = 3
+mouse_filter = 2
+script = ExtResource("1_w8xpa")
+
+[node name="Texture" type="TextureRect" parent="."]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+mouse_filter = 2
+texture = SubResource("AtlasTexture_m36yp")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 2
+text = "x12"

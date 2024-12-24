@@ -13,6 +13,12 @@ extends Node
 @export var sprite : Sprite2D
 @onready var enemy : Enemy = get_owner()
 
+var player : Player
+
+
+func _ready():
+	player = get_tree().get_first_node_in_group("player")
+
 
 func _physics_process(delta: float) -> void:
 	if !enemy.alive:
@@ -26,7 +32,8 @@ func _physics_process(delta: float) -> void:
 		animation_player.play("idle")
 		return
 	
-	sprite.flip_h = enemy.velocity.x < 0
+	var direction = player.global_position - enemy.global_position
+	sprite.flip_h = direction.x < 0
 	
 	var animation_name = "walk"
 	

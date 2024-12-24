@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="CraftingRecipe" load_steps=9 format=3 uid="uid://duwxk8u1avxov"]
+
+[ext_resource type="Script" path="res://Util/Items/crafting_ingredient.gd" id="1_e6l77"]
+[ext_resource type="Script" path="res://Util/Items/crafting_recipe.gd" id="2_jpdg1"]
+[ext_resource type="Resource" uid="uid://mxe3slsxjm58" path="res://Resources/Items/Materials/stick.tres" id="2_p8iyy"]
+[ext_resource type="Resource" uid="uid://dh5d7qp354vxq" path="res://Resources/Items/Materials/fish.tres" id="3_0b6fp"]
+[ext_resource type="Resource" uid="uid://df7xgc2v4p61p" path="res://Resources/Items/Weapons/stone_pickaxe.tres" id="4_ygjlo"]
+
+[sub_resource type="Resource" id="Resource_tadrt"]
+script = ExtResource("1_e6l77")
+item = ExtResource("2_p8iyy")
+count = 25
+
+[sub_resource type="Resource" id="Resource_v0ss6"]
+script = ExtResource("1_e6l77")
+item = ExtResource("3_0b6fp")
+count = 30
+
+[sub_resource type="Resource" id="Resource_bdawa"]
+script = ExtResource("1_e6l77")
+item = ExtResource("4_ygjlo")
+count = 1
+
+[resource]
+script = ExtResource("2_jpdg1")
+ingredients = Array[ExtResource("1_e6l77")]([SubResource("Resource_tadrt"), SubResource("Resource_v0ss6")])
+output = SubResource("Resource_bdawa")

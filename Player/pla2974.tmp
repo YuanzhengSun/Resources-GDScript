@@ -1,0 +1,112 @@
+[gd_scene load_steps=18 format=3 uid="uid://dl7eyk012o1hp"]
+
+[ext_resource type="Script" path="res://Player/Scripts/player.gd" id="1_8rogi"]
+[ext_resource type="Texture2D" uid="uid://b8qo5sm247axm" path="res://Art/Bitlytic/B0-Z0.png" id="2_5ht7k"]
+[ext_resource type="Script" path="res://Player/Scripts/player_movement.gd" id="3_cjxe3"]
+[ext_resource type="Script" path="res://Player/Scripts/player_animation.gd" id="4_of2ax"]
+[ext_resource type="Script" path="res://Player/Scripts/player_weapon.gd" id="4_rntaj"]
+[ext_resource type="Script" path="res://Player/Scripts/player_camera.gd" id="5_dq44d"]
+[ext_resource type="AnimationLibrary" uid="uid://c8n45di3aj1ys" path="res://Player/Animations/player.res" id="7_qwi34"]
+[ext_resource type="Script" path="res://Util/Components/hitbox.gd" id="8_pcl1g"]
+[ext_resource type="Script" path="res://Player/player_health.gd" id="9_l0lo5"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_5xbb6"]
+radius = 6.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_2ix7w"]
+radius = 4.0
+height = 14.0
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_p4448"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_xldp4"]
+animation = &"idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_fbrvf"]
+animation = &"run_left"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_cvija"]
+animation = &"run_right"
+
+[sub_resource type="AnimationNodeBlendSpace1D" id="AnimationNodeBlendSpace1D_pvejd"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_xldp4")
+blend_point_0/pos = 0.0
+blend_point_1/node = SubResource("AnimationNodeAnimation_fbrvf")
+blend_point_1/pos = -0.1
+blend_point_2/node = SubResource("AnimationNodeAnimation_cvija")
+blend_point_2/pos = 0.1
+blend_mode = 1
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_6djsc"]
+nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_p4448")
+nodes/TimeScale/position = Vector2(0, 80)
+nodes/WalkDirection/node = SubResource("AnimationNodeBlendSpace1D_pvejd")
+nodes/WalkDirection/position = Vector2(-540, 60)
+node_connections = [&"TimeScale", 0, &"WalkDirection", &"output", 0, &"TimeScale"]
+
+[node name="Player" type="CharacterBody2D" groups=["player"]]
+collision_mask = 128
+script = ExtResource("1_8rogi")
+
+[node name="PlayerHealth" type="Node" parent="." node_paths=PackedStringArray("hitbox", "animation_player")]
+script = ExtResource("9_l0lo5")
+hitbox = NodePath("../Hitbox")
+animation_player = NodePath("../AnimationPlayer")
+max_health = 3.0
+
+[node name="Hitbox" type="Area2D" parent="."]
+collision_mask = 0
+script = ExtResource("8_pcl1g")
+
+[node name="Hit Collision" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("CircleShape2D_5xbb6")
+
+[node name="FloorCollision" type="CollisionShape2D" parent="."]
+position = Vector2(0, 3)
+rotation = 1.57079
+shape = SubResource("CapsuleShape2D_2ix7w")
+
+[node name="PlayerSprite" type="Sprite2D" parent="."]
+position = Vector2(0, -12)
+texture = ExtResource("2_5ht7k")
+hframes = 8
+vframes = 3
+frame = 16
+
+[node name="PlayerMovement" type="Node" parent="."]
+script = ExtResource("3_cjxe3")
+
+[node name="PlayerAnimation" type="Node" parent="." node_paths=PackedStringArray("animation_tree", "sprite")]
+script = ExtResource("4_of2ax")
+animation_tree = NodePath("../AnimationTree")
+sprite = NodePath("../PlayerSprite")
+
+[node name="PlayerWeapon" type="Node2D" parent="." node_paths=PackedStringArray("firing_position")]
+script = ExtResource("4_rntaj")
+firing_position = NodePath("../FiringPosition")
+
+[node name="FiringPosition" type="Marker2D" parent="."]
+position = Vector2(6, -3)
+
+[node name="PlayerCamera" type="Camera2D" parent="." node_paths=PackedStringArray("target")]
+zoom = Vector2(2, 2)
+script = ExtResource("5_dq44d")
+target = NodePath("..")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": ExtResource("7_qwi34")
+}
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+active = false
+libraries = {
+"": ExtResource("7_qwi34")
+}
+tree_root = SubResource("AnimationNodeBlendTree_6djsc")
+anim_player = NodePath("../AnimationPlayer")
+parameters/TimeScale/scale = 1.0
+parameters/WalkDirection/blend_position = -0.415554
+
+[connection signal="health_changed" from="PlayerHealth" to="." method="on_health_changed"]
+[connection signal="damaged" from="Hitbox" to="." method="on_hitbox_damaged"]

@@ -1,0 +1,64 @@
+[gd_scene load_steps=8 format=3 uid="uid://xieyefjkh2a1"]
+
+[ext_resource type="Script" path="res://UI/Scripts/item_slot.gd" id="1_0oiiu"]
+[ext_resource type="Theme" uid="uid://d1eibj6u66lma" path="res://UI/Theme/main_theme.tres" id="1_207lh"]
+[ext_resource type="Texture2D" uid="uid://c5xonqa2480cc" path="res://Art/Kenney/ui_packed.png" id="2_kcout"]
+[ext_resource type="Texture2D" uid="uid://dnfmimtdyt0r0" path="res://Art/Kenney/1_bit_pack.png" id="4_7b3ex"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bphbs"]
+atlas = ExtResource("2_kcout")
+region = Rect2(256, 0, 32, 32)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_17sth"]
+bg_color = Color(0.392157, 0.462745, 0.521569, 1)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4j0xk"]
+atlas = ExtResource("4_7b3ex")
+region = Rect2(528, 320, 16, 16)
+
+[node name="ItemSlot" type="TextureButton"]
+custom_minimum_size = Vector2(60, 60)
+offset_right = 60.0
+offset_bottom = 60.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+focus_mode = 0
+mouse_filter = 1
+theme = ExtResource("1_207lh")
+texture_normal = SubResource("AtlasTexture_bphbs")
+stretch_mode = 0
+script = ExtResource("1_0oiiu")
+
+[node name="Panel" type="Panel" parent="."]
+self_modulate = Color(1, 1, 1, 0.580392)
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 2.0
+offset_top = 2.0
+offset_right = -2.0
+offset_bottom = -2.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_17sth")
+
+[node name="ItemSprite" type="Sprite2D" parent="."]
+position = Vector2(30, 30)
+scale = Vector2(3, 3)
+texture = SubResource("AtlasTexture_4j0xk")
+region_rect = Rect2(208, 96, 16, 16)
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 4.0
+offset_right = 76.0
+offset_bottom = 62.0
+scale = Vector2(0.28097, 0.28097)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 6
+theme_override_constants/shadow_offset_y = 6
+theme_override_font_sizes/font_size = 48
+text = "64"

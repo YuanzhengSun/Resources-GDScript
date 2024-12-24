@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="CraftingRecipe" load_steps=9 format=3 uid="uid://bka4ew20mrmf2"]
+
+[ext_resource type="Script" path="res://Util/Items/crafting_ingredient.gd" id="1_usuf2"]
+[ext_resource type="Script" path="res://Util/Items/crafting_recipe.gd" id="2_1x4ch"]
+[ext_resource type="Resource" uid="uid://mxe3slsxjm58" path="res://Resources/Items/Materials/stick.tres" id="2_x5uv7"]
+[ext_resource type="Resource" uid="uid://br1e6826mf6w2" path="res://Resources/Items/Materials/rock.tres" id="3_khfy2"]
+[ext_resource type="Resource" uid="uid://ct5oncxj1qalo" path="res://Resources/Items/Weapons/stone_shovel.tres" id="4_ukw3q"]
+
+[sub_resource type="Resource" id="Resource_r5vl7"]
+script = ExtResource("1_usuf2")
+item = ExtResource("2_x5uv7")
+count = 50
+
+[sub_resource type="Resource" id="Resource_jnxfh"]
+script = ExtResource("1_usuf2")
+item = ExtResource("3_khfy2")
+count = 50
+
+[sub_resource type="Resource" id="Resource_umytv"]
+script = ExtResource("1_usuf2")
+item = ExtResource("4_ukw3q")
+count = 1
+
+[resource]
+script = ExtResource("2_1x4ch")
+ingredients = Array[ExtResource("1_usuf2")]([SubResource("Resource_r5vl7"), SubResource("Resource_jnxfh")])
+output = SubResource("Resource_umytv")

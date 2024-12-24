@@ -1,0 +1,52 @@
+[gd_resource type="Theme" load_steps=9 format=3 uid="uid://d1eibj6u66lma"]
+
+[ext_resource type="FontFile" uid="uid://b8pyg1ebld7au" path="res://UI/Font/Silkscreen-Regular.ttf" id="1_gjmb3"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gevcx"]
+bg_color = Color(0.223529, 0.223529, 0.223529, 0.643137)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xe8r4"]
+bg_color = Color(0.412152, 0.412152, 0.412152, 0.529412)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uvdk2"]
+bg_color = Color(0.352941, 0.352941, 0.352941, 0.643137)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_740cv"]
+bg_color = Color(0.239216, 0.239216, 0.239216, 0.588235)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3sjn6"]
+bg_color = Color(0.847474, 0.847474, 0.847474, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jmve0"]
+bg_color = Color(0.581033, 0.581033, 0.581033, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_t7uob"]
+bg_color = Color(0.920995, 0.920995, 0.920995, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+anti_aliasing = false
+
+[resource]
+default_font = ExtResource("1_gjmb3")
+Button/styles/focus = SubResource("StyleBoxFlat_gevcx")
+Button/styles/hover = SubResource("StyleBoxFlat_xe8r4")
+Button/styles/normal = SubResource("StyleBoxFlat_uvdk2")
+Button/styles/pressed = SubResource("StyleBoxFlat_740cv")
+Label/colors/font_shadow_color = Color(0, 0, 0, 1)
+Label/constants/shadow_offset_x = 2
+Label/constants/shadow_offset_y = 2
+VScrollBar/styles/grabber = SubResource("StyleBoxFlat_3sjn6")
+VScrollBar/styles/grabber_highlight = SubResource("StyleBoxFlat_jmve0")
+VScrollBar/styles/grabber_pressed = SubResource("StyleBoxFlat_t7uob")
