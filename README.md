@@ -17,7 +17,7 @@ This project was made mainly for use in my basic tutorial on Resources on [YouTu
 
 Using this project should be as simple as cloning it via git or downloading as a zip file. From there, you can point Godot to the project.godot file, and it _should_ just run.
 
-I do not require credit, you can use this as a template or a learning resource or any way you want to. If you do, you're welcome to share it and tag me on Twitter [@Bitlytic](https://www.twitter.com/bitlytic), or better Twitter [@bitlytic.bsky.social](https://bsky.app/profile/bitlytic.dev), I would love to see what you make!
+I do not require credit, you can use this as a template or a learning resource or any way you want to. If you do, you're welcome to share it and tag me on Twitter [@Bitlytic](https://www.twitter.com/bitlytic), or better Twitter [@bitlytic.dev](https://bsky.app/profile/bitlytic.dev), I would love to see what you make!
 
 
 ## Assets
