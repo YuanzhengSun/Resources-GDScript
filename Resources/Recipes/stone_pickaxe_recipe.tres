@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="CraftingRecipe" load_steps=9 format=3 uid="uid://duwxk8u1avxov"]
 
-[ext_resource type="Script" path="res://Util/Items/crafting_ingredient.gd" id="1_e6l77"]
-[ext_resource type="Script" path="res://Util/Items/crafting_recipe.gd" id="2_jpdg1"]
+[ext_resource type="Script" uid="uid://wsmu0tg35a5d" path="res://Util/Items/crafting_ingredient.gd" id="1_e6l77"]
+[ext_resource type="Script" uid="uid://ja4bcocstn63" path="res://Util/Items/crafting_recipe.gd" id="2_jpdg1"]
 [ext_resource type="Resource" uid="uid://mxe3slsxjm58" path="res://Resources/Items/Materials/stick.tres" id="2_p8iyy"]
 [ext_resource type="Resource" uid="uid://dh5d7qp354vxq" path="res://Resources/Items/Materials/fish.tres" id="3_0b6fp"]
 [ext_resource type="Resource" uid="uid://df7xgc2v4p61p" path="res://Resources/Items/Weapons/stone_pickaxe.tres" id="4_ygjlo"]

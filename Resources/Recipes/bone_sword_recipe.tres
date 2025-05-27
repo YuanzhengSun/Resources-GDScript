@@ -1,8 +1,8 @@
 [gd_resource type="Resource" script_class="CraftingRecipe" load_steps=9 format=3 uid="uid://boejtqjedxkpl"]
 
-[ext_resource type="Script" path="res://Util/Items/crafting_ingredient.gd" id="1_t1asq"]
+[ext_resource type="Script" uid="uid://wsmu0tg35a5d" path="res://Util/Items/crafting_ingredient.gd" id="1_t1asq"]
 [ext_resource type="Resource" uid="uid://bi74twc4r5grv" path="res://Resources/Items/Materials/bone.tres" id="2_2flar"]
-[ext_resource type="Script" path="res://Util/Items/crafting_recipe.gd" id="2_wu5b3"]
+[ext_resource type="Script" uid="uid://ja4bcocstn63" path="res://Util/Items/crafting_recipe.gd" id="2_wu5b3"]
 [ext_resource type="Resource" uid="uid://br1e6826mf6w2" path="res://Resources/Items/Materials/rock.tres" id="3_j3nuh"]
 [ext_resource type="Resource" uid="uid://d2msg3gyi40qb" path="res://Resources/Items/Weapons/bone_sword.tres" id="4_ri1r7"]
 

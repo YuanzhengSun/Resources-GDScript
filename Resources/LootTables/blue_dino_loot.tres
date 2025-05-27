@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="LootTable" load_steps=5 format=3 uid="uid://tpxkaa0ercoj"]
 
-[ext_resource type="Script" path="res://Util/Enemy/loot_table.gd" id="1_hkqn0"]
-[ext_resource type="Script" path="res://Util/Items/item_roll.gd" id="1_n5mm6"]
+[ext_resource type="Script" uid="uid://c8v2ygu2li6r7" path="res://Util/Enemy/loot_table.gd" id="1_hkqn0"]
+[ext_resource type="Script" uid="uid://cktnpa0ypneh2" path="res://Util/Items/item_roll.gd" id="1_n5mm6"]
 [ext_resource type="Resource" uid="uid://bi74twc4r5grv" path="res://Resources/Items/Materials/bone.tres" id="2_t4v1f"]
 
 [sub_resource type="Resource" id="Resource_ywf0s"]

@@ -1,11 +1,11 @@
 [gd_scene load_steps=20 format=3 uid="uid://drlfovyb0gbep"]
 
 [ext_resource type="Theme" uid="uid://d1eibj6u66lma" path="res://UI/Theme/main_theme.tres" id="1_lq2wk"]
-[ext_resource type="Script" path="res://UI/Scenes/crafting_menu.gd" id="2_nrqbd"]
+[ext_resource type="Script" uid="uid://cqhdfh0ibt3ux" path="res://UI/Scenes/crafting_menu.gd" id="2_nrqbd"]
 [ext_resource type="Texture2D" uid="uid://c5xonqa2480cc" path="res://Art/Kenney/ui_packed.png" id="3_si50r"]
 [ext_resource type="PackedScene" uid="uid://dim3jrs64lx8s" path="res://UI/Scenes/ingredient.tscn" id="4_0oedh"]
 [ext_resource type="PackedScene" uid="uid://dv8thk8b64oa6" path="res://UI/Scenes/recipe_button.tscn" id="4_6om1k"]
-[ext_resource type="Script" path="res://UI/Scenes/craft_button.gd" id="6_2uunc"]
+[ext_resource type="Script" uid="uid://bjb3m8o1lbv6t" path="res://UI/Scenes/craft_button.gd" id="6_2uunc"]
 
 [sub_resource type="Animation" id="Animation_f54tb"]
 length = 0.001
@@ -115,9 +115,9 @@ tracks/2/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_b4vsw"]
 _data = {
-"RESET": SubResource("Animation_f54tb"),
-"hide": SubResource("Animation_8ey04"),
-"show": SubResource("Animation_mwbu7")
+&"RESET": SubResource("Animation_f54tb"),
+&"hide": SubResource("Animation_8ey04"),
+&"show": SubResource("Animation_mwbu7")
 }
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8l3y2"]

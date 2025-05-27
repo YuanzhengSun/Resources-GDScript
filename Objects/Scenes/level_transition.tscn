@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://bol6m2x0tdflu"]
 
-[ext_resource type="Script" path="res://Objects/Scripts/level_transition.gd" id="1_lo77e"]
+[ext_resource type="Script" uid="uid://ddtkaq3avwp8b" path="res://Objects/Scripts/level_transition.gd" id="1_lo77e"]
 [ext_resource type="Texture2D" uid="uid://53h01ho1lvwp" path="res://Art/Kenney/fish.png" id="2_60wfm"]
 
 [sub_resource type="Animation" id="Animation_oynsq"]
@@ -49,8 +49,8 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_rl3xk"]
 _data = {
-"RESET": SubResource("Animation_oynsq"),
-"fade_out": SubResource("Animation_ax8oh")
+&"RESET": SubResource("Animation_oynsq"),
+&"fade_out": SubResource("Animation_ax8oh")
 }
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_2ukk2"]

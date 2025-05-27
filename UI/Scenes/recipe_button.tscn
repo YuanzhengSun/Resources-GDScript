@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://dv8thk8b64oa6"]
 
-[ext_resource type="Script" path="res://UI/Scenes/recipe_button.gd" id="1_60m1t"]
+[ext_resource type="Script" uid="uid://dqdjy34gdpdet" path="res://UI/Scenes/recipe_button.gd" id="1_60m1t"]
 [ext_resource type="Texture2D" uid="uid://dnfmimtdyt0r0" path="res://Art/Kenney/1_bit_pack.png" id="1_uu1fq"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_85xq4"]

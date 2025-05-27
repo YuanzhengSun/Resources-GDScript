@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://gxenn5due63o"]
 
-[ext_resource type="Script" path="res://Objects/Scripts/item_drop.gd" id="1_o1eft"]
+[ext_resource type="Script" uid="uid://dmep0p0bbddh8" path="res://Objects/Scripts/item_drop.gd" id="1_o1eft"]
 [ext_resource type="Texture2D" uid="uid://dnfmimtdyt0r0" path="res://Art/Kenney/1_bit_pack.png" id="2_s8vul"]
 [ext_resource type="Theme" uid="uid://d1eibj6u66lma" path="res://UI/Theme/main_theme.tres" id="3_n20rt"]
 

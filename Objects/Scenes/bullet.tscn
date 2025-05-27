@@ -1,8 +1,8 @@
 [gd_scene load_steps=6 format=3 uid="uid://dvnhfujng2ybw"]
 
-[ext_resource type="Script" path="res://Objects/Scripts/bullet.gd" id="1_7775e"]
+[ext_resource type="Script" uid="uid://bs2pbpo7cm5lq" path="res://Objects/Scripts/bullet.gd" id="1_7775e"]
 [ext_resource type="Texture2D" uid="uid://cr8v60ue1jsl7" path="res://Art/Bitlytic/bullet.png" id="1_gclts"]
-[ext_resource type="Script" path="res://Util/Components/hurtbox.gd" id="3_2ig4x"]
+[ext_resource type="Script" uid="uid://b1ghfesgd84pg" path="res://Util/Components/hurtbox.gd" id="3_2ig4x"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_0cebq"]
 radius = 6.0

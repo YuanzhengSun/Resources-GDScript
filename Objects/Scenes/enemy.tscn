@@ -1,15 +1,15 @@
 [gd_scene load_steps=26 format=3 uid="uid://ckfohqhp1io7i"]
 
-[ext_resource type="Script" path="res://Objects/Scripts/Enemy/enemy.gd" id="1_i5ap4"]
+[ext_resource type="Script" uid="uid://21cituxdhp74" path="res://Objects/Scripts/Enemy/enemy.gd" id="1_i5ap4"]
 [ext_resource type="Resource" uid="uid://d0vpr4kgckjx6" path="res://Resources/Enemy/yellow_dino.tres" id="2_cu4um"]
 [ext_resource type="Texture2D" uid="uid://eb28cx5toii3" path="res://Art/Arks/DinoSprites - vita.png" id="5_8jp15"]
-[ext_resource type="Script" path="res://Util/Components/hitbox.gd" id="6_4fu81"]
-[ext_resource type="Script" path="res://Objects/Scripts/Enemy/enemy_animation.gd" id="7_136f6"]
-[ext_resource type="Script" path="res://Objects/Scripts/Enemy/enemy_chase.gd" id="10_1a1ec"]
-[ext_resource type="Script" path="res://Objects/Scripts/Enemy/enemy_health.gd" id="10_uthop"]
-[ext_resource type="Script" path="res://Objects/Scripts/stun_handler.gd" id="11_drljl"]
-[ext_resource type="Script" path="res://Util/Components/hurtbox.gd" id="12_42qi7"]
-[ext_resource type="Script" path="res://Objects/Scripts/Enemy/enemy_health_bar.gd" id="13_5fmek"]
+[ext_resource type="Script" uid="uid://blbbp4fqsui6q" path="res://Util/Components/hitbox.gd" id="6_4fu81"]
+[ext_resource type="Script" uid="uid://ja6yu5ra4uk5" path="res://Objects/Scripts/Enemy/enemy_animation.gd" id="7_136f6"]
+[ext_resource type="Script" uid="uid://bmkxdmrkvjrpb" path="res://Objects/Scripts/Enemy/enemy_chase.gd" id="10_1a1ec"]
+[ext_resource type="Script" uid="uid://c1m7ksyc1x32n" path="res://Objects/Scripts/Enemy/enemy_health.gd" id="10_uthop"]
+[ext_resource type="Script" uid="uid://1ssm7wdeev5o" path="res://Objects/Scripts/stun_handler.gd" id="11_drljl"]
+[ext_resource type="Script" uid="uid://b1ghfesgd84pg" path="res://Util/Components/hurtbox.gd" id="12_42qi7"]
+[ext_resource type="Script" uid="uid://be3h2hi867cgc" path="res://Objects/Scripts/Enemy/enemy_health_bar.gd" id="13_5fmek"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_7ufao"]
 radius = 13.0
@@ -348,14 +348,14 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_sxd88"]
 _data = {
-"RESET": SubResource("Animation_3rrto"),
-"death": SubResource("Animation_o6yyx"),
-"idle": SubResource("Animation_qhy7m"),
-"run_left": SubResource("Animation_nwual"),
-"run_right": SubResource("Animation_jubin"),
-"stunned": SubResource("Animation_whn11"),
-"walk_left": SubResource("Animation_xm4x4"),
-"walk_right": SubResource("Animation_sirhc")
+&"RESET": SubResource("Animation_3rrto"),
+&"death": SubResource("Animation_o6yyx"),
+&"idle": SubResource("Animation_qhy7m"),
+&"run_left": SubResource("Animation_nwual"),
+&"run_right": SubResource("Animation_jubin"),
+&"stunned": SubResource("Animation_whn11"),
+&"walk_left": SubResource("Animation_xm4x4"),
+&"walk_right": SubResource("Animation_sirhc")
 }
 
 [sub_resource type="Curve" id="Curve_2q65h"]

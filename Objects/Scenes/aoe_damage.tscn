@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://b87fsq0thjuux"]
 
-[ext_resource type="Script" path="res://Player/Scripts/aoe_damage.gd" id="1_pt6de"]
+[ext_resource type="Script" uid="uid://b64wbpfw43bs7" path="res://Player/Scripts/aoe_damage.gd" id="1_pt6de"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_qeb0v"]
 

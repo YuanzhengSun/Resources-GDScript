@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="Item" load_steps=4 format=3 uid="uid://d2msg3gyi40qb"]
 
-[ext_resource type="Script" path="res://Util/Items/item.gd" id="1_tuo68"]
+[ext_resource type="Script" uid="uid://s62p5q8mhfse" path="res://Util/Items/item.gd" id="1_tuo68"]
 [ext_resource type="Texture2D" uid="uid://dnfmimtdyt0r0" path="res://Art/Kenney/1_bit_pack.png" id="2_ok0ku"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ib7ax"]
